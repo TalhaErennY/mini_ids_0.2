@@ -10,12 +10,12 @@ ________________________________________
 The purpose of this project is to build a small, portable security device that can:
 1.	Analyze Wi-Fi traffic before the user connects to the network
 2.	Detect security risks such as:
-  o	Deauthentication attacks
-  o	Evil Twin access points
-  o	Weak or outdated encryption
-  o	Abnormal beacon activity
-  o	Suspicious channel or BSSID behavior
-3.	Help users make informed decisions about whether a network is safe to join
+  *	Deauthentication attacks
+  *	Evil Twin access points
+  *	Weak or outdated encryption
+  *	Abnormal beacon activity
+  *	Suspicious channel or BSSID behavior
+4.	Help users make informed decisions about whether a network is safe to join
 
 The long-term objective is to turn this into a user-friendly product rather than just a technical demo.
 ________________________________________
@@ -23,64 +23,64 @@ ________________________________________
 # System Architecture
 ESP32-S3 (Wireless Analysis Core)
 The ESP32-S3 handles:
-  •	Promiscuous mode packet capture
-  •	Beacon parsing (SSID, BSSID, channel, security information)
-  •	Deauthentication monitoring
-  •	Channel scanning (1–13)
-  •	Per-access point statistics
-  •	Basic anomaly detection rules
-  •	Data transmission to the mobile application (via Bluetooth LE)
+  *	Promiscuous mode packet capture
+  *	Beacon parsing (SSID, BSSID, channel, security information)
+  *	Deauthentication monitoring
+  *	Channel scanning (1–13)
+  *	Per-access point statistics
+  *	Basic anomaly detection rules
+  *	Data transmission to the mobile application (via Bluetooth LE)
   
 STM32 (Security and Processing Coprocessor)
 In the final design, an STM32 microcontroller is planned to:
-  •	Perform additional security checks
-  •	Run supplemental analysis algorithms
-  •	Serve as a reliability and safety layer
-  •	Optionally handle firmware updates, sensor aggregation, or power management
+  *	Perform additional security checks
+  *	Run supplemental analysis algorithms
+  *	Serve as a reliability and safety layer
+  *	Optionally handle firmware updates, sensor aggregation, or power management
 The STM32 acts as a dedicated embedded security engine to complement the ESP32’s wireless capabilities.
 Machine Learning Layer
 
 Two alternative approaches are planned:
 1.	TinyML running on the ESP32-S3 or STM32
-  o	Classifies network behavior as normal or anomalous
-  o	Extracts lightweight features such as packet rates, beacon intervals, and security tags
+  *	Classifies network behavior as normal or anomalous
+  *	Extracts lightweight features such as packet rates, beacon intervals, and security tags
 2.	Cloud-based analysis
-  o	ESP32 sends summarized data to the mobile app
-  o	The app forwards it to a backend for deeper ML-based evaluation
-  o	Results are returned to the user as a risk score
+  *	ESP32 sends summarized data to the mobile app
+  *	The app forwards it to a backend for deeper ML-based evaluation
+  *	Results are returned to the user as a risk score
 ________________________________________
 
 # Mobile Application (Bluetooth Integration)
 The device communicates with a mobile app through Bluetooth Low Energy (BLE).
 The app is intended to:
-  •	Pair with the device
-  •	Receive analyzed Wi-Fi environment data
-  •	Display network risk assessments
-  •	Show warnings about unsafe networks
-  •	Help the user decide whether to connect
+  *	Pair with the device
+  *	Receive analyzed Wi-Fi environment data
+  *	Display network risk assessments
+  *	Show warnings about unsafe networks
+  *	Help the user decide whether to connect
 ________________________________________
 
 # Current Features (Implemented)
-  •	Full ESP32-S3 promiscuous Wi-Fi sniffer
-  •	Initial channel scan (1–13) to discover all nearby access points
-  •	SSID/BSSID extraction from beacon frames
-  •	Channel identification
-  •	Deauthentication frame detection
-  •	Per-network statistics table (beacon count, deauth count, channel)
-  •	Real-time console output in CSV and formatted table formats
-  •	Modular architecture for future expansion
+  *	Full ESP32-S3 promiscuous Wi-Fi sniffer
+  *	Initial channel scan (1–13) to discover all nearby access points
+  *	SSID/BSSID extraction from beacon frames
+  *	Channel identification
+  *	Deauthentication frame detection
+  *	Per-network statistics table (beacon count, deauth count, channel)
+  *	Real-time console output in CSV and formatted table formats
+  *	Modular architecture for future expansion
 ________________________________________
 
 # Planned Features (Future Work)
-  •	TinyML-based anomaly detection
-  •	Risk scoring model for public Wi-Fi networks
-  •	Bluetooth mobile app for user interaction
-  •	BLE-based network selection and monitoring
-  •	Integration of STM32 as a secondary processing unit
-  •	Secure over-the-air updates
-  •	Detection of advanced attacks such as:
-  o	Beacon flood
-  o	Probe response spoofing
-  o	Evil Twin access points
-  o	Rogue AP identification
-  •	Exportable logs and JSON-based API
+  *	TinyML-based anomaly detection
+  *	Risk scoring model for public Wi-Fi networks
+  *	Bluetooth mobile app for user interaction
+  *	BLE-based network selection and monitoring
+  *	Integration of STM32 as a secondary processing unit
+  *	Secure over-the-air updates
+  *	Detection of advanced attacks such as:
+  *	Beacon flood
+  *	Probe response spoofing
+  *	Evil Twin access points
+  *	Rogue AP identification
+  *	Exportable logs and JSON-based API
